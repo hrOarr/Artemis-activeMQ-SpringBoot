@@ -50,7 +50,7 @@ public class ArtemisConsumerService {
                     event.setModifiedTime(new Date());
                     eventService.saveOrUpdate(event);
 
-                    // sleep for 2 seconds
+                    // sleep for 5 seconds
                     Thread.sleep(5000);
 
                     event.setStatus(EventEnum.SUCCESS);
