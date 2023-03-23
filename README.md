@@ -9,3 +9,6 @@ It supports two main ways -
 - Topic (publish/subscribers messaging)
 
 In this project, I tried to focus on basic usage implementation of ActiveMQ Artemis in Spring Boot. Two different applications (one is producer, another is consumer) are made to demonstrate the flow of Artemis with JMS.
+
+#### Update
+- Added Spring Retry logic along with Spring AOP
