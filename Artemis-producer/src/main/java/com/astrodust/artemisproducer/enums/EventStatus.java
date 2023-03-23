@@ -1,5 +1,5 @@
 package com.astrodust.artemisproducer.enums;
 
-public enum EventEnum {
+public enum EventStatus {
     QUEUED, FAILED, REJECTED, SUCCESS;
 }

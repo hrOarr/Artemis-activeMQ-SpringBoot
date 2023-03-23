@@ -4,22 +4,21 @@ import com.astrodust.artemisproducer.entity.Event;
 import com.astrodust.artemisproducer.repository.EventRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class EventServiceImpl implements EventService{
+    private final EventRepository eventRepository;
+    private final ArtemisProducerService artemisProducerService;
+    private final ObjectMapper objectMapper;
 
-    @Autowired
-    private EventRepository eventRepository;
-
-    @Autowired
-    private ArtemisProducerService artemisProducerService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    public EventServiceImpl(EventRepository eventRepository, ArtemisProducerService producerService, ObjectMapper objectMapper){
+        this.eventRepository = eventRepository;
+        this.artemisProducerService = producerService;
+        this.objectMapper = objectMapper;
+    }
 
     @Override
     public Event generateEvent(Event event) {
@@ -27,7 +26,7 @@ public class EventServiceImpl implements EventService{
         try{
             String jsonEvent = objectMapper.writeValueAsString(event);
             artemisProducerService.send(jsonEvent);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return savedEvent;
